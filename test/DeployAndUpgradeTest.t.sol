@@ -29,6 +29,8 @@ contract DeployAndUpgradeTest is StdCheats, Test {
     function testDeploymentIsV1() public {
         address proxyAddress = deployBox.deployBox();
         uint256 expectedValue = 7;
+
+        //This function doesn't revert as expected because the fallback at the proxy reroutes setValue to BoxV1. This funcion therefore passes
         vm.expectRevert();
         BoxV2(proxyAddress).setValue(expectedValue);
     }
